@@ -16,17 +16,19 @@ import pages.BasePage;
  * @author zhangyingkai
  *	
  * 2018年8月29日,下午7:45:34
+ * 
+ * 新增价格方案页面
  */
 public class XZJGFAPage extends BasePage{
 	/**
 	 * 省市、合作方选项
 	 */
 	private String proviceInput="//*[@id=\"home\"]/div[2]/div/div/div[2]/div[1]/div[1]/div/div[1]/div/div[1]/input";
-	private String proviceOption="/html/body/div[2]/div/div[1]/ul/li[1]";
+	private String proviceOption="/html/body/div[2]/div/div[1]/ul/li[3]";
 	private String cityInput="//*[@id=\"home\"]/div[2]/div/div/div[2]/div[1]/div[1]/div/div[2]/div/div[1]/input";
-	private String cityOption="/html/body/div[3]/div/div[1]/ul/li";
+	private String cityOption="/html/body/div[3]/div/div[1]/ul/li[2]";
 	private String partnerInput="//*[@id=\"home\"]/div[2]/div/div/div[2]/div[1]/div[2]/div/div/div/div[1]/input";
-	private String partnerOption="/html/body/div[4]/div/div[1]/ul/li";
+	private String partnerOption="/html/body/div[4]/div/div[1]/ul/li[1]";
 	
 	/**
 	 * 新增价格方案
@@ -43,6 +45,7 @@ public class XZJGFAPage extends BasePage{
 	private String mainPicture="//*[@id=\"home\"]/div[2]/div/div/div[3]/div[1]/div/div[2]/div[1]/div[8]/div[1]/div/div[2]/div/input";
 	private String detailPicture="//*[@id=\"home\"]/div[2]/div/div/div[3]/div[1]/div/div[2]/div[1]/div[8]/div[2]/div/div[2]/div/input";
 	private String saveButton="//*[@id=\"home\"]/div[2]/div/div/div[3]/div[1]/div/div[2]/div[2]/button[2]/span";
+	private String saveAndAuditButton="//*[@id=\"home\"]/div[2]/div/div/div[3]/div[1]/div/div[2]/div[2]/button[3]/span";
 	/**
 	 * 编辑价格方案
 	 */
@@ -55,6 +58,11 @@ public class XZJGFAPage extends BasePage{
 	 */
 	private String deleteButton="//*[@id=\"home\"]/div[2]/div/div/div[2]/div[2]/div[3]/div/div[4]/div[2]/table/tbody/tr[1]/td[8]/div/button[2]/span";
 	private String quedingButton="//*[@id=\"home\"]/div[2]/div/div/div[4]/div[1]/div/div[2]/div/button[2]/span";
+	/**
+	 * 生效按钮
+	 */
+	private String effectButton="//*[@id=\"home\"]/div[2]/div/div/div[2]/div[2]/div[3]/div/div[4]/div[2]/table/tbody/tr/td[8]/div/div/label/span[2]";
+	
 	
 	
 	
@@ -72,6 +80,7 @@ public class XZJGFAPage extends BasePage{
 		click(getElement(partnerInput, "x"));
 		click(getElement(partnerOption, "x"));
 		sleep(3000);
+		LoggerUtil.info("选择第一条新增的产品");
 		click(getElement(product, "x"));
 	}
 	
@@ -84,7 +93,7 @@ public class XZJGFAPage extends BasePage{
 		click(getElement(addProgramButton,"x"));
 		sleep(2000);
 		sendKeys(getElement(priceProgramName, "x"), "自动化测试（新增）");
-		sendKeys(getElement(xiangouNum, "x"), "100");
+		sendKeys(getElement(xiangouNum, "x"), "99999999999999999");
 		sendKeys(getElement(tuangouPrice, "x"), "0.5");
 		sendKeys(getElement(shichangPrice, "x"), "1");
 		sendKeys(getElement(qbNum, "x"), "100");
@@ -93,6 +102,28 @@ public class XZJGFAPage extends BasePage{
 		addPicture();
 		sleep(2000);
 		click(getElement(saveButton, "x"));
+		sleep(2000);
+		AssertUtil.assertEquals(getElement(programName, "x").getText(), "自动化测试（新增）", "");
+		LoggerUtil.info("新增价格方案成功");
+	}
+	/**
+	 * 新增并申请审核价格方案
+	 * @throws InterruptedException 
+	 */
+	public void addAndAuditPriceProgram() throws InterruptedException {
+		LoggerUtil.info("新增价格方案开始");
+		click(getElement(addProgramButton,"x"));
+		sleep(2000);
+		sendKeys(getElement(priceProgramName, "x"), "自动化测试（新增）");
+		sendKeys(getElement(xiangouNum, "x"), "99999999999999999");
+		sendKeys(getElement(tuangouPrice, "x"), "0.5");
+		sendKeys(getElement(shichangPrice, "x"), "1");
+		sendKeys(getElement(qbNum, "x"), "0");
+		sendKeys(getElement(zcNum, "x"), "300");
+		sendKeys(getElement(priceAdd, "x"), "0.01");
+		addPicture();
+		sleep(2000);
+		click(getElement(saveAndAuditButton, "x"));
 		sleep(2000);
 		AssertUtil.assertEquals(getElement(programName, "x").getText(), "自动化测试（新增）", "");
 		LoggerUtil.info("新增价格方案成功");
@@ -114,7 +145,10 @@ public class XZJGFAPage extends BasePage{
 		sendKeys(pic2, picture2.getAbsolutePath());
 		LoggerUtil.info("上传图片成功");
 	}
-	
+	/**
+	 * 编辑价格方案
+	 * @throws InterruptedException
+	 */
 	public void updateProgram() throws InterruptedException {
 		LoggerUtil.info("开始编辑价格方案");
 		sleep(2000);
@@ -128,7 +162,10 @@ public class XZJGFAPage extends BasePage{
 		AssertUtil.assertEquals(getElement(programName, "x").getText(), "自动化测试（编辑）", "");
 		LoggerUtil.info("编辑价格方案成功");
 	}
-	
+	/**
+	 * 删除价格方案
+	 * @throws InterruptedException
+	 */
 	public void deleteProgram() throws InterruptedException {
 		LoggerUtil.info("开始删除价格方案");
 		sleep(2000);
@@ -136,5 +173,15 @@ public class XZJGFAPage extends BasePage{
 		click(getElement(quedingButton, "x"));
 		sleep(2000);
 		AssertUtil.assertEquals(checkElementCanBeFind(programName), false, "");
+	}
+	
+	/**
+	 * 生效价格方案
+	 * @throws InterruptedException 
+	 */
+	public void effectPriceProgram() throws InterruptedException {
+		LoggerUtil.info("开始生效价格方案");
+		sleep(3000);
+		click(getElement(effectButton, "x"));
 	}
 }

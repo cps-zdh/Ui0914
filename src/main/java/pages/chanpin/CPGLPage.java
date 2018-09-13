@@ -47,11 +47,11 @@ public class CPGLPage extends BasePage{
 	private String mainPicture="//*[@id=\"home\"]/div[2]/div/div/div[1]/div[3]/div[1]/div/div[2]/div/div[7]/div/div[2]/div/input";
 	private String detailPicture="//*[@id=\"home\"]/div[2]/div/div/div[1]/div[3]/div[1]/div/div[2]/div/div[8]/div[2]/div/input";
 	private String lx="//*[@id=\"home\"]/div[2]/div/div/div[1]/div[3]/div[1]/div/div[2]/div/div[5]/div[5]/div/div/div[1]/input";
-	private String lxOption="/html/body/div[8]/div/div[1]/ul/li[1]";
+	private String lxOption="/html/body/div[8]/div/div[1]/ul/li[6]";
 	private String cs="//*[@id=\"home\"]/div[2]/div/div/div[1]/div[3]/div[1]/div/div[2]/div/div[6]/div[4]/div[2]/div/div[1]/input";
-	private String csOption="/html/body/div[9]/div/div[1]/ul/li[1]";
+	private String csOption="/html/body/div[9]/div/div[1]/ul/li[4]";
 	private String saveButton="//*[@id=\"home\"]/div[2]/div/div/div[1]/div[3]/div[1]/div/div[2]/div/div[9]/button[2]/span";
-	
+	private String saveAndShelvesButton="//*[@id=\"home\"]/div[2]/div/div/div[1]/div[3]/div[1]/div/div[2]/div/div[9]/button[3]/span";
 	/**
 	 * 产品列表（编辑，删除）
 	 */
@@ -61,6 +61,7 @@ public class CPGLPage extends BasePage{
 	private String quedingOfDelete="//*[@id=\"home\"]/div[2]/div/div/div[2]/div[1]/div/div[2]/div/button[2]/span";
 	private String cpmc2="//*[@id=\"home\"]/div[2]/div/div/div[1]/div[3]/div[1]/div/div[2]/div/div[4]/div[2]/div/input";
 	private String saveButton2="//*[@id=\"home\"]/div[2]/div/div/div[1]/div[3]/div[1]/div/div[2]/div/div[8]/button[2]/span";
+	
 	/**
 	 * 选择省、市、合作方
 	 * @throws InterruptedException
@@ -77,7 +78,7 @@ public class CPGLPage extends BasePage{
 		click(getElement(partnerOption,"x"));
 	}
 	/**
-	 * 填写新增产品属性
+	 * 填写新增产品属性（保存）
 	 * @throws InterruptedException 
 	 */
 	public void addProduct() throws InterruptedException {
@@ -91,7 +92,7 @@ public class CPGLPage extends BasePage{
 		List<WebElement> elements=new ArrayList<WebElement>();
 		/*String js="document.getElementById(\"train_date\").removeAttribute(\"readonly\");";
 		excuse_js(js);*/
-		String[] values= {"自动化测试用","自动化测试","自动化测试（新增）","自动化测试","100","自动化测试","自动化测试","123","100","123","100"};
+		String[] values= {"自动化测试用","自动化测试","自动化测试（新增）","自动化测试","100","自动化测试","自动化测试","500","50","500","50"};
 		elements.add(getElement(scmc,"x"));
 		elements.add(getElement(tjhy, "x"));
 		elements.add(getElement(cpmc, "x"));
@@ -121,6 +122,52 @@ public class CPGLPage extends BasePage{
 		String name=getElement(productName, "x").getText();
 		AssertUtil.assertEquals(name, "自动化测试（新增）", "产品名称是自动化测试（新增）");
 		LoggerUtil.info("新增产品成功");
+	}
+	/**
+	 * 填写新增产品属性（保存）
+	 * @throws InterruptedException 
+	 */
+	public void addAndShelvesProduct() throws InterruptedException {
+		LoggerUtil.info("开始新增产品...");
+		click(getElement(addButton,"x"));
+		click(getElement(xsqyOfInput,"x"));
+		sleep(2000);
+		click(getElement(xsqyOfZheJiang,"x"));
+		click(getElement(xsqyOfInput2,"x"));
+		click(getElement(xsqyOfWenZhou,"x"));
+		List<WebElement> elements=new ArrayList<WebElement>();
+		/*String js="document.getElementById(\"train_date\").removeAttribute(\"readonly\");";
+		excuse_js(js);*/
+		String[] values= {"自动化测试用","自动化测试","方大侠专用","自动化测试","100","自动化测试","自动化测试","500","50","500","50"};
+		elements.add(getElement(scmc,"x"));
+		elements.add(getElement(tjhy, "x"));
+		elements.add(getElement(cpmc, "x"));
+		elements.add(getElement(syhy,"x"));
+		elements.add(getElement(jqts, "x"));
+		elements.add(getElement(ylmc, "x"));
+		elements.add(getElement(wl,"x"));
+		elements.add(getElement(maxjdc, "x"));
+		elements.add(getElement(minjdc, "x"));
+		elements.add(getElement(maxjdk, "x"));
+		elements.add(getElement(minjdk, "x"));
+		LoggerUtil.info("输入产品信息");
+		sendKeys(elements, values);
+		click(getElement(jqsj, "x"));
+		sleep(1000);
+		click(getElement(queding,"x"));
+		click(getElement(lx,"x"));
+		click(getElement(lxOption,"x"));
+		click(getElement(cs,"x"));
+		click(getElement(csOption,"x"));
+		
+		//添加图片
+		addPicture();
+		sleep(3000);
+		click(getElement(saveAndShelvesButton, "x"));
+		sleep(2000);
+		String name=getElement(productName, "x").getText();
+		AssertUtil.assertEquals(name, "方大侠专用", "产品名称是自动化测试（新增）");
+		LoggerUtil.info("新增并上架产品成功");
 	}
 	/**
 	 * 上传图片

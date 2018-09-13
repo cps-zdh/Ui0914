@@ -8,10 +8,9 @@ import pages.BasePage;
 
 /**
  * 
- * @description crm主页面
- * @author fs
- * @2018年8月14日
- *
+ * @author zhangyingkai
+ *	
+ * 2018年9月13日,上午10:22:43
  */
 public class CrmHomePage extends BasePage{
 	
@@ -60,7 +59,15 @@ public class CrmHomePage extends BasePage{
 	private String subCpgl="//*[@id=\"menu\"]/div/ul/li[2]/span";
 	
 
-	  private String choosePriceProgram="//*[@id=\"menu\"]/div/ul/li[6]";
+	private String choosePriceProgram="//*[@id=\"menu\"]/div/ul/li[6]";
+	/*
+	 * 产品上架审核
+	 */
+	private String productShelfAudit="//*[@id=\"menu\"]/div/ul/li[3]/span";
+	/*
+	 * 价格方案审核
+	 */
+	private String PriceProgramAudit="//*[@id=\"menu\"]/div/ul/li[7]/span";
 	  
 	
 	/**
@@ -201,7 +208,7 @@ public class CrmHomePage extends BasePage{
 	   * 进入产品管理-选择价格方案
 	   * @throws InterruptedException 
 	   */
-	  public void toChoosePriceProgram() throws InterruptedException {
+	public void toChoosePriceProgram() throws InterruptedException {
 	    sleep(3000);
 	    if(checkVisable(getSubCPGL())) {
 	      click(getElement(choosePriceProgram, "x"));
@@ -212,6 +219,29 @@ public class CrmHomePage extends BasePage{
 	    }
 	  }
 	
+	/**
+	 * 切换页面至产品上架审核
+	 * @throws InterruptedException
+	 */
+	public void toProductShelfAudit() throws InterruptedException {
+		LoggerUtil.info("开始切换页面至-----产品上架审核");
+		sleep(3000);
+		click(getElement(productShelfAudit, "x"));
+		click(getElement(productShelfAudit, "x"));
+		LoggerUtil.info("切换页面成功");
+	}
+	/**
+	 * 切换页面至价格方案审核
+	 * @throws InterruptedException 
+	 * 
+	 */
+	public void toPriceProgramAudit() throws InterruptedException {
+		LoggerUtil.info("开始切换页面至----价格方案审核");
+		sleep(3000);
+		click(getElement(PriceProgramAudit, "x"));
+		click(getElement(PriceProgramAudit, "x"));
+		LoggerUtil.info("切换页面成功");
+	}
 	private WebElement getSubCPGL() {
 		return getElement(subCpgl, "x");
 	}
