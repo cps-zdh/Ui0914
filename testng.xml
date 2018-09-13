@@ -2,19 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="cps-ui自动化测试" verbose="1" preserve-order="true" parallel="false">
   <test name="cps-ui自动化测试">
-  	<!-- <groups>
-  		<run>
-  			<include name="group1"></include>
-  			<include name="group3"></include>
-  		</run>
-  	</groups> -->
     <classes>
-    	<!--  -->
-     	<!-- <class name="test.TGTest"></class>
-	    <class name="test.SXTest"></class>
-	      <class name="test.PriceProgramTest"></class>
-	     <class name="test.JFSCTest"></class> -->
-	     <class name="test.ProductTest"></class>
     </classes>
   </test> <!-- Test -->
  	<listeners>
