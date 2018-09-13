@@ -25,6 +25,8 @@ public class JFSCTest {
 		}
 	}
 	
+	
+	
 	@Test(description="积分商城下单(全)",priority=1)
 	public void testOrder001() throws InterruptedException {
 		tgHomePage.toJFSC();

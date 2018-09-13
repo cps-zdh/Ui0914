@@ -31,10 +31,21 @@ public class TGTest extends BaseTest{
 		}
 	}
 	
-	@Test(description="团购下单",invocationCount=3)
+
+	@Test(description="纸板团购EBC商品下单",priority=0)
+	public void zbtg_xiadan() {
+		try {
+			tgHomePage.buy_ZBTG();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	@Test(description="团购下单-将上个ui新增的订单再下一单",invocationCount=2,priority=1)
 	public void tuangou_xiadan() {
 		begin();
-		LoggerUtil.info("团购下单脚本开始");
+		LoggerUtil.info("团购再下一单脚本开始");
 		try {
 			tgHomePage.toDDAgain();
 			tgHomePage.dd_again();
@@ -42,6 +53,7 @@ public class TGTest extends BaseTest{
 			e.printStackTrace();
 		}end();
 	}
+	
 	
 	@AfterClass
 	public void destory() {

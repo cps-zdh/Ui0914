@@ -412,22 +412,37 @@ public class BasePage {
       String currentWindow=driver.getWindowHandle();
       Set<String> handles=driver.getWindowHandles();
       LoggerUtil.info("当前窗口数量："+handles.size());
-      Iterator<String> it=handles.iterator();
-      while(it.hasNext()) {
-        if(currentWindow.equals(it.next())) {
-          try {
-            //关闭旧窗口
-            driver.close();
-            //切换到新窗口
-            driver=driver.switchTo().window(it.next());
-            LoggerUtil.info("切换到新窗口："+driver.getTitle());
-          }catch(Exception e) {
-            e.printStackTrace();
-            LoggerUtil.error("无法切换到新窗口");
+      if(handles.size()>1) {
+    	  Iterator<String> it=handles.iterator();
+          while(it.hasNext()) {
+            if(currentWindow.equals(it.next())) {
+              try {
+                //关闭旧窗口
+                driver.close();
+                //切换到新窗口
+                driver=driver.switchTo().window(it.next());
+                LoggerUtil.info("切换到新窗口："+driver.getTitle());
+              }catch(Exception e) {
+                e.printStackTrace();
+                LoggerUtil.error("无法切换到新窗口");
+              }
+            }
+            
           }
-        }
-        
       }
+     
+    }
+    
+    /**
+     * 如果一开始打开了两个窗口，就把后一个data；窗口删掉
+     */
+    public void deleteWindowHandle() {
+      String currentWindow=driver.getWindowHandle();
+      Set<String> handles=driver.getWindowHandles();
+      LoggerUtil.info("当前窗口数量："+handles.size());
+      if(handles.size()>1) {
+      }
+     
     }
 	
 	

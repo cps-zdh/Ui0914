@@ -3,6 +3,16 @@
 <suite name="cps-ui自动化测试" verbose="1" preserve-order="true" parallel="false">
   <test name="cps-ui自动化测试">
     <classes>
+<<<<<<< HEAD
+=======
+
+	    <class name="test.SXTest"></class>
+	      <class name="test.PriceProgramTest"></class>
+	   	 <class name="test.CrmJFSCTest"></class>
+	     <class name="test.ProductTest"></class>
+	      <class name="test.JFSCTest"></class>
+	     <class name="test.TGTest"></class>
+>>>>>>> 22d59b1e2853315bf3b960cee38f64048ce9c406
     </classes>
   </test> <!-- Test -->
  	<listeners>
